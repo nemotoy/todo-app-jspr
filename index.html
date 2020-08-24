@@ -2,16 +2,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>Todo App</title>
-    <!-- 1. CSSファイルを読み込み -->
     <link
       href="https://jsprimer.net/use-case/todoapp/final/final/index.css"
       rel="stylesheet"
     />
   </head>
   <body>
-    <!-- 2. class属性をCSSのために指定 -->
     <div class="todoapp">
-      <!-- 3. id属性をJavaScriptのために指定 -->
       <form id="js-form">
         <input
           id="js-form-input"
@@ -21,12 +18,9 @@
           autocomplete="off"
         />
       </form>
-      <!-- 4. TodoアプリのメインとなるTodoリスト -->
       <div id="js-todo-list" class="todo-list">
-        <!-- 動的に更新されるTodoリスト -->
       </div>
       <footer class="footer">
-        <!-- 5. Todoアイテム数の表示 -->
         <span id="js-todo-count">Todo item counts: 0</span>
       </footer>
     </div>
