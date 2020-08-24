@@ -12,7 +12,10 @@
 ## Peripheral technology
 
 * formatter
+  * [Prettier](https://prettier.io/)
 * linter
+  * [ESlint](https://eslint.org/)
 * test
+  * [Mocha](https://mochajs.org/)
 * dep manager
 * build
