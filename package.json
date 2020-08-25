@@ -1,0 +1,23 @@
+{
+  "name": "todo-app-jspr",
+  "version": "1.0.0",
+  "description": "implements todo application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nemotoy/todo-app-jspr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nemotoy/todo-app-jspr/issues"
+  },
+  "homepage": "https://github.com/nemotoy/todo-app-jspr#readme",
+  "devDependencies": {
+    "mocha": "^7.2.0"
+  }
+}
