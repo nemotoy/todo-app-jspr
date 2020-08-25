@@ -4,61 +4,66 @@ import { TodoListView } from "./view/TodoListView.js";
 import { render } from "./view/html-util.js";
 
 export class App {
-    constructor({ formElement, formInputElement, todoListContainerElement, todoCountElement }) {
-        this.todoListModel = new TodoListModel();
-        this.todoListView = new TodoListView([]);
+  constructor({
+    formElement,
+    formInputElement,
+    todoListContainerElement,
+    todoCountElement,
+  }) {
+    this.todoListModel = new TodoListModel();
+    this.todoListView = new TodoListView([]);
 
-        this.formElement = formElement;
-        this.formInputElement = formInputElement;
-        this.todoListContainerElement = todoListContainerElement;
-        this.todoCountElement = todoCountElement;
+    this.formElement = formElement;
+    this.formInputElement = formInputElement;
+    this.todoListContainerElement = todoListContainerElement;
+    this.todoCountElement = todoCountElement;
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-    handleAdd(title) {
-        this.todoListModel.addTodo(new TodoItemModel({ title, completed: false }));
-    }
+  handleAdd(title) {
+    this.todoListModel.addTodo(new TodoItemModel({ title, completed: false }));
+  }
 
-    handleUpdate({ id, completed }) {
-        this.todoListModel.updateTodo({ id, completed });
-    }
+  handleUpdate({ id, completed }) {
+    this.todoListModel.updateTodo({ id, completed });
+  }
 
-    handleDelete({ id }) {
-        this.todoListModel.deleteTodo({ id });
-    }
+  handleDelete({ id }) {
+    this.todoListModel.deleteTodo({ id });
+  }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const inputElement = this.formInputElement;
-        this.handleAdd(inputElement.value);
-        inputElement.value = "";
-    }
+  handleSubmit(event) {
+    event.preventDefault();
+    const inputElement = this.formInputElement;
+    this.handleAdd(inputElement.value);
+    inputElement.value = "";
+  }
 
-    handleChange() {
-        const todoCountElement = this.todoCountElement;
-        const todoListContainerElement = this.todoListContainerElement;
-        const todoItems = this.todoListModel.getTodoItems();
-        const todoListElement = this.todoListView.createElement(todoItems, {
-            onUpdateTodo: ({ id, completed }) => {
-                this.handleUpdate({ id, completed });
-            },
-            onDeleteTodo: ({ id }) => {
-                this.handleDelete({ id });
-            }
-        })
-        render(todoListElement, todoListContainerElement);
-        todoCountElement.textContent = `Todo item counts: ${this.todoListModel.getTotalCount()}`;
-    }
+  handleChange() {
+    const todoCountElement = this.todoCountElement;
+    const todoListContainerElement = this.todoListContainerElement;
+    const todoItems = this.todoListModel.getTodoItems();
+    const todoListElement = this.todoListView.createElement(todoItems, {
+      onUpdateTodo: ({ id, completed }) => {
+        this.handleUpdate({ id, completed });
+      },
+      onDeleteTodo: ({ id }) => {
+        this.handleDelete({ id });
+      },
+    });
+    render(todoListElement, todoListContainerElement);
+    todoCountElement.textContent = `Todo item counts: ${this.todoListModel.getTotalCount()}`;
+  }
 
-    mount() {
-        this.todoListModel.onChange(this.handleChange);
-        this.formElement.addEventListener("submit", this.handleSubmit);
-    }
+  mount() {
+    this.todoListModel.onChange(this.handleChange);
+    this.formElement.addEventListener("submit", this.handleSubmit);
+  }
 
-    unmount() {
-        this.todoListModel.offChange(this.handleChange);
-        this.formElement.removeEventListener("submit", this.handleSubmit);
-    }
+  unmount() {
+    this.todoListModel.offChange(this.handleChange);
+    this.formElement.removeEventListener("submit", this.handleSubmit);
+  }
 }

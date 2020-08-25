@@ -4,9 +4,9 @@ implements todo application.
 
 ## Reference
 
-* [todoapp](https://jsprimer.net/use-case/todoapp/)
-* [TodoMVC](http://todomvc.com/)
-* [A_re-introduction_to_JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
+- [todoapp](https://jsprimer.net/use-case/todoapp/)
+- [TodoMVC](http://todomvc.com/)
+- [A_re-introduction_to_JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
 
 ## Command
 
