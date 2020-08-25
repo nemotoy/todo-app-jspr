@@ -53,31 +53,12 @@ export class App {
     }
 
     mount() {
-        this.todoListModel.onChange(this.handleChange)
+        this.todoListModel.onChange(this.handleChange);
         this.formElement.addEventListener("submit", this.handleSubmit);
     }
 
-    // TODO: refactor
     unmount() {
-        const formElement = document.querySelector("#js-form");
-        const inputElement = document.querySelector("#js-form-input");
-        const containerElement = document.querySelector("#js-todo-list");
-        const todoItemCoundElement = document.querySelector("#js-todo-count");
-
-        this.todoListModel.offChange(() => {
-            const todoItems = this.todoListModel.getTodoItems();
-            const todoListView = new TodoListView();
-            const todoListElement = todoListView.createElement(todoItems, {
-                onUpdateTodo: ({ id, completed }) => {
-                    this.handleUpdate({ id, completed });
-                },
-                onDeleteTodo: ({ id }) => {
-                    this.handleDelete({ id });
-                }
-            })
-            render(todoListElement, containerElement);
-            todoItemCoundElement.textContent = `Todo item counts: ${this.todoListModel.getTotalCount()}`;
-        })
+        this.todoListModel.offChange(this.handleChange);
         this.formElement.removeEventListener("submit", this.handleSubmit);
     }
 }
