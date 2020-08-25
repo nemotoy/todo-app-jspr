@@ -19,5 +19,6 @@
   "homepage": "https://github.com/nemotoy/todo-app-jspr#readme",
   "devDependencies": {
     "mocha": "^7.2.0"
-  }
+  },
+  "type": "module"
 }
