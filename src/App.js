@@ -10,9 +10,6 @@ export class App {
     }
 
     handleAdd(title) {
-        if (title === "") {
-            return;
-        }
         this.todoListModel.addTodo(new TodoItemModel({ title, completed: false }));
     }
 
