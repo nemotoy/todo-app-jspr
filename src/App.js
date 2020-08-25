@@ -48,6 +48,7 @@ export class App {
         });
     }
 
+    // TODO: refactor
     unmount() {
         const formElement = document.querySelector("#js-form");
         const inputElement = document.querySelector("#js-form-input");
