@@ -50,4 +50,31 @@ export class App {
             inputElement.value = "";
         });
     }
+
+    unmount() {
+        const formElement = document.querySelector("#js-form");
+        const inputElement = document.querySelector("#js-form-input");
+        const containerElement = document.querySelector("#js-todo-list");
+        const todoItemCoundElement = document.querySelector("#js-todo-count");
+
+        this.todoListModel.offChange(() => {
+            const todoItems = this.todoListModel.getTodoItems();
+            const todoListView = new TodoListView();
+            const todoListElement = todoListView.createElement(todoItems, {
+                onUpdateTodo: ({ id, completed }) => {
+                    this.handleUpdate({ id, completed });
+                },
+                onDeleteTodo: ({ id }) => {
+                    this.handleDelete({ id });
+                }
+            })
+            render(todoListElement, containerElement);
+            todoItemCoundElement.textContent = `Todo item counts: ${this.todoListModel.getTotalCount()}`;
+        })
+        formElement.removeEventListener("submit", (event) => {
+            event.preventDefault();
+            this.handleAdd(inputElement.value);
+            inputElement.value = "";
+        });
+    }
 }
