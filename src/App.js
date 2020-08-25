@@ -76,10 +76,6 @@ export class App {
             render(todoListElement, containerElement);
             todoItemCoundElement.textContent = `Todo item counts: ${this.todoListModel.getTotalCount()}`;
         })
-        formElement.removeEventListener("submit", (event) => {
-            event.preventDefault();
-            this.handleAdd(inputElement.value);
-            inputElement.value = "";
-        });
+        this.formElement.removeEventListener("submit", this.handleSubmit);
     }
 }
