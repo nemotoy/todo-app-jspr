@@ -4,9 +4,16 @@ import { TodoListView } from "./view/TodoListView.js";
 import { render } from "./view/html-util.js";
 
 export class App {
-    constructor() {
+    constructor({ formElement, formInputElement, todoListContainerElement, todoCountElement }) {
         this.todoListModel = new TodoListModel();
         this.todoListView = new TodoListView([]);
+
+        this.formElement = formElement;
+        this.formInputElement = formInputElement;
+        this.todoListContainerElement = todoListContainerElement;
+        this.todoCountElement = todoCountElement;
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleAdd(title) {
@@ -21,16 +28,20 @@ export class App {
         this.todoListModel.deleteTodo({ id });
     }
 
+    handleSubmit(event) {
+        event.preventDefault();
+        const inputElement = this.formInputElement;
+        this.handleAdd(inputElement.value);
+        inputElement.value = "";
+    }
+
     mount() {
-        const formElement = document.querySelector("#js-form");
-        const inputElement = document.querySelector("#js-form-input");
-        const containerElement = document.querySelector("#js-todo-list");
-        const todoItemCoundElement = document.querySelector("#js-todo-count");
 
         this.todoListModel.onChange(() => {
             const todoItems = this.todoListModel.getTodoItems();
-            const todoListView = new TodoListView();
-            const todoListElement = todoListView.createElement(todoItems, {
+            const todoCountElement = this.todoCountElement;
+            const todoListContainerElement = this.todoListContainerElement;
+            const todoListElement = this.todoListView.createElement(todoItems, {
                 onUpdateTodo: ({ id, completed }) => {
                     this.handleUpdate({ id, completed });
                 },
@@ -38,14 +49,10 @@ export class App {
                     this.handleDelete({ id });
                 }
             })
-            render(todoListElement, containerElement);
-            todoItemCoundElement.textContent = `Todo item counts: ${this.todoListModel.getTotalCount()}`;
+            render(todoListElement, todoListContainerElement);
+            todoCountElement.textContent = `Todo item counts: ${this.todoListModel.getTotalCount()}`;
         })
-        formElement.addEventListener("submit", (event) => {
-            event.preventDefault();
-            this.handleAdd(inputElement.value);
-            inputElement.value = "";
-        });
+        this.formElement.addEventListener("submit", this.handleSubmit);
     }
 
     // TODO: refactor
