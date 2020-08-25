@@ -4,7 +4,9 @@
   "description": "implements todo application.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/"
+    "test": "mocha test/",
+    "fmt": "npx prettier --write .",
+    "fmtc": "npx prettier --check ."
   },
   "repository": {
     "type": "git",
